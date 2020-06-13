@@ -13,7 +13,7 @@ request.onupgradeneeded = function (event) {
 };
 
 request.onsuccess = function (event) {
-  db.event.target.result;
+  db = event.target.result;
 
   if (navigator.onLine) {
     checkDatabase();
@@ -32,7 +32,7 @@ function saveTransaction(trans) {
   store.add(trans);
 }
 
-function checkDatase() {
+function checkDatabase() {
   const transaction = db.transaction([OBJ_STORE], "readwrite");
 
   const store = transaction.objectStore(OBJ_STORE);
@@ -43,7 +43,7 @@ function checkDatase() {
       if(getAll.result.length > 0){
           fetch("/api/transaction/bulk", {
               method: "POST",
-              body = JSON.stringify(getAll.result),
+              body: JSON.stringify(getAll.result),
               headers: {
                 Accept: "application/json, text/plain, */*",
                 "Content-Type": "application/json"
@@ -61,4 +61,4 @@ function checkDatase() {
   };
 }
 
-window.addEventListener("online",checkDatase);
+window.addEventListener("online",checkDatabase);
