@@ -1,11 +1,11 @@
 //  DECLARE VARIABLES
 // =======================================
-const DB_NAME = "budget";
+const DB_NAME = "budgets";
 const OBJ_STORE = "transactions";
 
 let db;
 
-const request = indexedDB.open(DB_NAME);
+const request = indexedDB.open(DB_NAME,1);
 
 request.onupgradeneeded = function (event) {
   const db = event.target.result;
@@ -24,7 +24,7 @@ request.onerror = function (event) {
   console.error("Error Occurred: " + event.target.errorCode);
 };
 
-function saveTransaction(trans) {
+function saveRecord(trans) {
   const transaction = db.transaction([OBJ_STORE], "readwrite");
 
   const store = transaction.objectStore(OBJ_STORE);
